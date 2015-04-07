@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <?php
   const APPID = "906203566106850";
-  const = "24082c36b988a2465f02fe537021a945";
+  const APPSECRET = "24082c36b988a2465f02fe537021a945";
 ?>
 
 <html>
