@@ -10,11 +10,23 @@
     const APPID = "906203566106850";
     const APPSECRET = "24082c36b988a2465f02fe537021a945";
 
-	 FacebookSession::setDefaultApplication(APPID, APPSECRET);
+	FacebookSession::setDefaultApplication(APPID, APPSECRET);
 	$helper = new FacebookRedirectLoginHelper('https://projetsesgi2.herokuapp.com/');
 	$loginUrl = $helper->getLoginUrl();
+
+
+	
+	if (isset($_SESSION) && isset($_SESSION['fb_token']) ) {
+		$session = $_SESSION['fb_token'];
+	}
+	else {
+	    $session = $helper->getSessionFromRedirect();
+		$loginUrl = $helper->getLoginUrl();
+        echo "<a href='".$loginUrl."'>Se connecter</a>";	
+	}
 	echo $loginUrl;
 ?>
+
 
 <html>
   <head>
@@ -40,6 +52,13 @@
        }(document, 'script', 'facebook-jssdk'));
     </script>
 	HELLO !!
+	<?php
+		if ($session) {
+			$session = new FacebookSession($_SESSION['fb_token'])
+		} else {
+			$session = $helper->getSessionFromRedirect();	 	
+		}
+	?>
 	<div
 	  class="fb-like"
 	  data-share="true"
