@@ -1,7 +1,18 @@
 <!DOCTYPE html>
 <?php
+	error_reporting(E_ALL);
+	ini_set("display_errors", 1);
+
+  require "facebook-php-sdk-v4-4.0-dev/autoload.php";
+
+	use Facebook\FacebookSession;
+    use Facebook\FacebookRedirectLoginHelper;
   const APPID = "906203566106850";
   const APPSECRET = "24082c36b988a2465f02fe537021a945";
+
+	$helper = FacebookSession::setDefaultApplication(APPID, APPSECRET);
+	$loginUrl = $helper->getLoginUrl();
+	echo $loginUrl;
 ?>
 
 <html>
